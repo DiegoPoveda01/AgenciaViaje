@@ -4,6 +4,11 @@ public class Venta {
 	private String cliente;
 	private String agenteViaje;
 	private CiudadDestino ciudad;
+	public Venta(String cliente, String agenteViaje, CiudadDestino ciudad){
+		this.cliente = cliente;
+		this.agenteViaje = agenteViaje;
+		this.ciudad = ciudad;
+	}
 
 	public String getCliente() {
 		return this.cliente;
@@ -20,7 +25,7 @@ public class Venta {
 	public void setAgenteViaje(String agenteViaje) {
 		this.agenteViaje = agenteViaje;
 	}
-	public CiudadDestino getCiudad(CiudadDestino ciudad){
+	public CiudadDestino getCiudad(){
 		return this.ciudad;
 	}
 	public void setCiudad(CiudadDestino ciudad){

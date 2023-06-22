@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AgenciaViaje {
 	private String nombre;
@@ -10,7 +11,20 @@ public class AgenciaViaje {
 	private String numeroTelefono;
 	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	private ArrayList<AgenteViaje> agentes = new ArrayList<AgenteViaje>();
+	private ArrayList<Venta> ventas = new ArrayList<Venta>();
 
+	public AgenciaViaje(String nombre, String destinos, int precios, String horarioAtencion, String numeroTelefono) {
+		this.nombre = nombre;
+		this.destinos = destinos;
+		this.precios = precios;
+		this.horarioAtencion = horarioAtencion;
+		this.numeroTelefono = numeroTelefono;
+		this.clientes = new ArrayList<>();
+		this.agentes = new ArrayList<>();
+		this.ventas = new ArrayList<>();
+	}
+
+	public ArrayList<Venta> getVentas(){return this.ventas;}
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -54,7 +68,7 @@ public class AgenciaViaje {
 	public void añadirCliente(Cliente cliente) {
 		String rutCliente = cliente.getRut();
 		if (!buscarCliente(rutCliente)) {
-			clientes.add(cliente);
+			this.clientes.add(cliente);
 			System.out.println("Cliente añadido correctamente.");
 		} else {
 			System.out.println("El cliente ya existe. No se puede añadir.");
@@ -73,7 +87,7 @@ public class AgenciaViaje {
 	}
 
 	public boolean buscarCliente(String rut) {
-		for (Cliente cliente : clientes) {
+		for (Cliente cliente : this.clientes) {
 			if (cliente.getRut().equals(rut)) {
 				return true;
 			}
@@ -108,21 +122,32 @@ public class AgenciaViaje {
 		}
 	}
 
+	public void generarVenta(Venta venta) {
+		this.ventas.add(venta);
+	}
+	public void cantidadClientes() {
+		int cantidadClientes = clientes.size();
+		System.out.println("Cantidad de clientes: " + cantidadClientes);
+	}
+	public void cantidadVendedores() {
+		int cantidadVendedores = agentes.size();
+		System.out.println("Cantidad de vendedores: " + cantidadVendedores);
+	}
 
-	public void generarVenta() {
-		if (!clientes.isEmpty() && !agentes.isEmpty()) {
-			Cliente cliente = clientes.get(0);
-			AgenteViaje agente = agentes.get(0);
-			CiudadDestino ciudad = new CiudadDestino();
-			ciudad.setNombre("Venecia");
-			ciudad.setPrecio(Integer.parseInt("1000000"));
-			Venta venta = new Venta();
-			venta.setCliente(cliente.getNombre());
-			venta.setAgenteViaje(agente.getNombre());
-			venta.setCiudad(ciudad);
-			System.out.println("Se generó una venta para el " + cliente.getNombre() + " con el  " + agente.getNombre() + " hacia la ciudad: " + venta.getCiudad(ciudad).getNombre() + " Con precio: " + ciudad.getPrecio());
-		} else {
-			System.out.println("No hay clientes o agentes disponibles para generar una venta.");
+	public List<Persona> personasMayores30Años() {
+		List<Persona> personasMayores30 = new ArrayList<>();
+		for (Cliente cliente : clientes) {
+			int edad = cliente.getEdad();
+			if (edad > 30) {
+				personasMayores30.add(cliente);
+			}
 		}
+		for (AgenteViaje agente : agentes) {
+			int edad = agente.getEdad();
+			if (edad > 30) {
+				personasMayores30.add(agente);
+			}
+		}
+		return personasMayores30;
 	}
 }

@@ -1,26 +1,13 @@
 package org.example;
 
 public class AgenteViaje extends Persona {
-	private String nombre;
-	private String rut;
 	private String numeroCelular;
 	private String apellido;
 
-	public String getNombre() {
-		return this.nombre;
+	public AgenteViaje(int edad, String nombre, String rut, String estadoCivil) {
+		super(edad, nombre, rut, estadoCivil);
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getRut() {
-		return this.rut;
-	}
-
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
 
 	public String getNumeroCelular() {
 		return this.numeroCelular;

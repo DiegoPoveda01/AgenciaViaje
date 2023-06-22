@@ -1,10 +1,18 @@
 package org.example;
 
 public abstract class Persona {
+	protected int edad;
 	protected String nombre;
 	protected String rut;
 	protected String estadoCivil;
-
+	public Persona(int edad, String nombre, String rut, String estadoCivil){
+		this.edad = edad;
+		this.nombre = nombre;
+		this.rut = rut;
+		this.estadoCivil = estadoCivil;
+	}
+    public int getEdad(){return this.edad;}
+	public void setEdad(int edad){this.edad = edad;}
 	public String getNombre() {
 		return this.nombre;
 	}
